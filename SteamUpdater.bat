@@ -10,9 +10,11 @@ IF %GID%=="" (
 
 ECHO.
 :GETNAME
-rem wget -O gameinfo.json "https://api.steamcmd.net/v1/info/%GID%"
+wget -O gameinfo.json "https://api.steamcmd.net/v1/info/%GID%"
 
-For /F "delims=" %%i in ('type gameinfo.json ^| jq -r ".data.\"740\".common.name"') DO SET "json=%%i"
+For /F "delims=" %%i in ('type gameinfo.json ^| jq -r ".data.\"%GID%\".common.name"') DO SET "json=%%i"
+
+cls
 
 ECHO %json%
 ECHO.
